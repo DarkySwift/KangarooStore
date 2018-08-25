@@ -18,7 +18,7 @@
 
 - Insert `github "DarkySwift/KangarooStore" ~> 1.0` to your Cartfile.
 - Run `carthage update`.
-- Link your app with `LittleOwl` in `Carthage/Build`.
+- Link your app with `KangarooStore` in `Carthage/Build`.
 
 #### [CocoaPods](https://github.com/cocoapods/cocoapods)
 
