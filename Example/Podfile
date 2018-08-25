@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'KangarooStore_Example' do
+  pod 'KangarooStore', :path => '../'
+
+  target 'KangarooStore_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
