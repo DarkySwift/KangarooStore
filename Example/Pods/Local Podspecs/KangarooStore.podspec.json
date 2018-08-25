@@ -1,0 +1,22 @@
+{
+  "name": "KangarooStore",
+  "version": "0.1.0",
+  "summary": "A short description of KangarooStore.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Carlos Duclos/KangarooStore",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Carlos Duclos": "darkzeratul64@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/Carlos Duclos/KangarooStore.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "KangarooStore/Classes/**/*"
+}

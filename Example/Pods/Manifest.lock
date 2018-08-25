@@ -1,0 +1,16 @@
+PODS:
+  - KangarooStore (0.1.0)
+
+DEPENDENCIES:
+  - KangarooStore (from `../`)
+
+EXTERNAL SOURCES:
+  KangarooStore:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  KangarooStore: 17871aee3f2335d0666186195eee9db1d2e33173
+
+PODFILE CHECKSUM: dd49c397d38582122d2d41288c497edf07719c92
+
+COCOAPODS: 1.5.3

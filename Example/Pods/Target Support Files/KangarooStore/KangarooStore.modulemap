@@ -1,0 +1,6 @@
+framework module KangarooStore {
+  umbrella header "KangarooStore-umbrella.h"
+
+  export *
+  module * { export * }
+}

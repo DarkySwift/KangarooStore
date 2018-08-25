@@ -1,24 +1,29 @@
 # KangarooStore
 
-[![CI Status](https://img.shields.io/travis/Carlos Duclos/KangarooStore.svg?style=flat)](https://travis-ci.org/Carlos Duclos/KangarooStore)
-[![Version](https://img.shields.io/cocoapods/v/KangarooStore.svg?style=flat)](https://cocoapods.org/pods/KangarooStore)
-[![License](https://img.shields.io/cocoapods/l/KangarooStore.svg?style=flat)](https://cocoapods.org/pods/KangarooStore)
-[![Platform](https://img.shields.io/cocoapods/p/KangarooStore.svg?style=flat)](https://cocoapods.org/pods/KangarooStore)
-
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+[![Build Status](https://travis-ci.org/DarkySwift/KangarooStore.svg?branch=master)](https://travis-ci.org/DarkySwift/KangarooStore)
+[![Cocoa Pod](https://cocoapod-badges.herokuapp.com/v/KangarooStore/badge.png)](https://cocoapods.org/pods/KangarooStore)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Language: Swift](https://img.shields.io/badge/Swift-4.1-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![codecov](https://codecov.io/gh/DarkySwift/KangarooStore/branch/master/graph/badge.svg)](https://codecov.io/gh/DarkySwift/KangarooStore)
+[![Platform](https://img.shields.io/badge/platform-iOS-orange.svg?style=flat)]()
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://raw.githubusercontent.com/DarkySwift/KangarooStore/develop/LICENSE)
+[![Author: carlos21](https://img.shields.io/badge/author-carlos21-blue.svg?style=flat)](https://www.linkedin.com/in/carlos-duclos-caballero-5b1aa520/)
 
 ## Requirements
 
-## Installation
+- Swift 3.2 or later
+- iOS 8.0 or later
 
-KangarooStore is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+#### [Carthage](https://github.com/Carthage/Carthage)
 
-```ruby
-pod 'KangarooStore'
-```
+- Insert `github "DarkySwift/KangarooStore" ~> 1.0` to your Cartfile.
+- Run `carthage update`.
+- Link your app with `LittleOwl` in `Carthage/Build`.
+
+#### [CocoaPods](https://github.com/cocoapods/cocoapods)
+
+- Insert `pod 'KangarooStore', '~> 1.0'` to your Podfile.
+- Run `pod install`.
 
 ## Author
 
