@@ -77,4 +77,13 @@ class Tests: XCTestCase {
         }
     }
     
+    func testFilterInBackgroundContext() {
+        do {
+            let predicate = NSPredicate(format: "lastname = %@", "test")
+            let query = Query<TestEntity>(context: kangaroo.backgroundContext).filtered(using: predicate)
+            let entities = query.execute()
+            
+            XCTAssertEqual(entities.count, 4)
+        }
+    }
 }
