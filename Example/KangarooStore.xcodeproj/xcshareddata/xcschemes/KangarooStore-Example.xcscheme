@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0900"
+   LastUpgradeVersion = "0940"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -46,7 +46,7 @@
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FC81351BD8BBCB2DC8470C5E656B43EF"
+            BlueprintIdentifier = "A56F2D299367B23684EF494E61682E4C"
             BuildableName = "KangarooStore.framework"
             BlueprintName = "KangarooStore"
             ReferencedContainer = "container:Pods/Pods.xcodeproj">
