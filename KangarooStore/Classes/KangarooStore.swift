@@ -12,6 +12,8 @@ public class KangarooStore {
     
     // MARK: - Properties
     
+    public static var defaultComparisonOptions: NSComparisonPredicate.Options = [.caseInsensitive, .diacriticInsensitive]
+    
     private lazy var shouldPatchCoreData: Bool =
         ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10,
                                                                       minorVersion: 0,
@@ -108,7 +110,7 @@ public class KangarooStore {
             let type = (storageType == .disk ? NSSQLiteStoreType : NSInMemoryStoreType)
             try persistentStoreCoordinator.addPersistentStore(ofType: type, configurationName: nil, at: storeURL, options: options)
         } catch {
-            fatalError("Error migrating store: \(error)")
+            fatalError("Error adding store: \(error)")
         }
     }
     

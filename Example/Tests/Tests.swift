@@ -2,6 +2,8 @@ import XCTest
 import CoreData
 @testable import KangarooStore
 
+typealias Query = KangarooStore.Query
+
 class Tests: XCTestCase {
     
     var kangaroo: KangarooStore!
@@ -85,6 +87,28 @@ class Tests: XCTestCase {
             let entities = query.execute()
             
             XCTAssertEqual(entities.count, 4)
+        }
+    }
+    
+    func testNonOptionalsComparisons() {
+        // less than
+        do {
+            let query = Query<TestEntity>(context: kangaroo.backgroundContext).filtered(using: predicate)
+            let entities = query.execute()
+        }
+        
+        // equals to
+        do {
+            let predicate: NSPredicate = (\TestEntity.name == "entity5")
+            let query = Query<TestEntity>(context: kangaroo.backgroundContext).filtered(using: predicate)
+            let entities = query.execute()
+            
+            XCTAssertEqual(entities.count, 1)
+            XCTAssertEqual(entities[0].id, 5)
+        }
+        
+        do {
+            
         }
     }
 }

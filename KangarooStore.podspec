@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   # s.resources        = 'KangarooStore/Assets/*'
   s.swift_version    = '4.1'
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+A very lightweight Core Data framework. You\'ll be able to fetch object in an easier way.
                        DESC
 
   s.homepage         = 'https://github.com/DarkySwift/KangarooStore'

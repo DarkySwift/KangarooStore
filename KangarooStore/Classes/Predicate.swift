@@ -30,4 +30,3 @@ public class Predicate: RawRepresentable {
         self.init(rawValue: NSPredicate(value: value))
     }
 }
-

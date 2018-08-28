@@ -32,7 +32,7 @@ public class FetchRequest<Entity: ManagedObject> {
         rawValue.fetchOffset = offset
         rawValue.fetchLimit = limit
         rawValue.fetchBatchSize = (self.limit > 0 && self.batchSize > self.limit ? 0 : self.batchSize)
-        rawValue.predicate = self.predicate
+        rawValue.predicate = predicate
         rawValue.sortDescriptors = sortDescriptors
         return rawValue
     }
