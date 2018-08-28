@@ -9,8 +9,8 @@
 Pod::Spec.new do |s|
   s.name             = 'KangarooStore'
   s.version          = '1.0'
-  s.summary          = 'A lightweight Core Data framework.'
-  s.resources        = 'LittleOwl/Assets/*'
+  s.summary          = 'A very lightweight Core Data framework.'
+  # s.resources        = 'KangarooStore/Assets/*'
   s.swift_version    = '4.1'
   s.description      = <<-DESC
 TODO: Add long description of the pod here.
@@ -25,7 +25,7 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'KangarooStore/Classes/**/*'
   
-  s.resource_bundles = {
-    'KangarooStore' => ['KangarooStore/Assets/**/*.{storyboard,xib,xcassets,imageset,png,jpg}']
-  }
+  # s.resource_bundles = {
+  #  'KangarooStore' => ['KangarooStore/Assets/**/*.{storyboard,xib,xcassets,imageset,png,jpg}']
+  # }
 end

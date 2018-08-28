@@ -48,7 +48,7 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7813C0D2AE91AC9761207820 /* Pods_KangarooStore_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KangarooStore_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C017D6D0F729764C970564A0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		CF77C137ED2957698417A4AD /* KangarooStore.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KangarooStore.podspec; path = ../KangarooStore.podspec; sourceTree = "<group>"; };
+		CF77C137ED2957698417A4AD /* KangarooStore.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KangarooStore.podspec; path = ../KangarooStore.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E7CD9BB5E361EE508CF6BFD2 /* Pods-KangarooStore_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KangarooStore_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KangarooStore_Tests/Pods-KangarooStore_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		EE67ABB38C4D79CB3C1CF73D /* Pods_KangarooStore_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KangarooStore_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */

@@ -10,3 +10,7 @@ import CoreData
 
 public typealias ManagedObjectContext = NSManagedObjectContext
 
+extension ManagedObjectContext {
+    
+    
+}

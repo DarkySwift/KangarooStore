@@ -68,7 +68,6 @@ public class KangarooStore {
     }
     
     @objc private func managedObjectContextDidSave(notification: Notification) {
-        
         guard let changedContext = notification.object as? ManagedObjectContext else { return }
         
         let viewContext = self.viewContext
@@ -76,11 +75,13 @@ public class KangarooStore {
         
         if (changedContext === self.backgroundContext) {
             viewContext.mergeChanges(fromContextDidSave: notification)
+            
         } else if (changedContext === self.viewContext) {
             backgroundContext.mergeChanges(fromContextDidSave: notification)
+        } else {
+            viewContext.mergeChanges(fromContextDidSave: notification)
+            backgroundContext.mergeChanges(fromContextDidSave: notification)
         }
-        
-        viewContext.mergeChanges(fromContextDidSave: notification)
         
         if shouldPatchCoreData {
             let privateQueueObjects = notification.userInfo?[NSUpdatedObjectsKey] as? Set<ManagedObject> ?? []
@@ -116,22 +117,23 @@ public class KangarooStore {
     }
     
     public func loadStoresAsync(completionHandler block: (() -> Void)? = nil) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             self.loadStores(completionHandler: block)
         }
     }
     
     @discardableResult
-    public func saveInView(_ block: (ManagedObjectContext) -> Void) -> Error? {
-        block(viewContext)
-        do { try viewContext.save(); return nil }
-        catch { return error }
-    }
-    
-    @discardableResult
-    public func saveInBackground(_ block: (ManagedObjectContext) -> Void) -> Error? {
-        block(backgroundContext)
-        do { try backgroundContext.save(); return nil }
+    public func save(in contextType: ContextType, _ block: (ManagedObjectContext) -> Void) -> Error? {
+        var context: ManagedObjectContext {
+            switch contextType {
+            case .view: return viewContext
+            case .background: return backgroundContext
+            case .custom(let context): return context
+            }
+        }
+        
+        block(context)
+        do { try context.save(); return nil }
         catch { return error }
     }
     

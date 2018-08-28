@@ -2,7 +2,7 @@
   "name": "KangarooStore",
   "version": "1.0",
   "summary": "A lightweight Core Data framework.",
-  "resources": "LittleOwl/Assets/*",
+  "resources": "KangarooStore/Assets/*",
   "swift_version": "4.1",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/DarkySwift/KangarooStore",

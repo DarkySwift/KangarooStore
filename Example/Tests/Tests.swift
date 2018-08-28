@@ -8,10 +8,11 @@ class Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        
         let bundle = Bundle(for: Tests.self)
         kangaroo = KangarooStore(name: "TestDB", storageType: .memory, bundle: bundle)
         kangaroo.loadStoresSync()
-        kangaroo.saveInView { context in
+        kangaroo.save(in: .view) { context in
             let entity2 = TestEntity(in: context)
             entity2.id = 2
             entity2.name = "entity2"
