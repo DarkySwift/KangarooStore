@@ -69,17 +69,21 @@ public class KangarooStore {
         NotificationCenter.default.removeObserver(self)
     }
     
+    // MARK: - Methods
+    
+    /// Handler method that merges changes to other contexts
     @objc private func managedObjectContextDidSave(notification: Notification) {
         guard let changedContext = notification.object as? ManagedObjectContext else { return }
         
         let viewContext = self.viewContext
         let backgroundContext = self.backgroundContext
         
-        if (changedContext === self.backgroundContext) {
+        if (changedContext === backgroundContext) {
             viewContext.mergeChanges(fromContextDidSave: notification)
             
-        } else if (changedContext === self.viewContext) {
+        } else if (changedContext === viewContext) {
             backgroundContext.mergeChanges(fromContextDidSave: notification)
+            
         } else {
             viewContext.mergeChanges(fromContextDidSave: notification)
             backgroundContext.mergeChanges(fromContextDidSave: notification)
@@ -100,9 +104,8 @@ public class KangarooStore {
         }
     }
     
-    // MARK: - Methods
-    
-    fileprivate func loadStores(completionHandler block: (() -> Void)? = nil) {
+    /// Loads the store
+    fileprivate func loadStore(configuration: Configuration = .default, completionHandler block: (() -> Void)? = nil) {
         do {
             let options = [NSMigratePersistentStoresAutomaticallyOption : true,
                            NSInferMappingModelAutomaticallyOption : true ]
@@ -114,16 +117,19 @@ public class KangarooStore {
         }
     }
     
-    public func loadStoresSync() {
-        self.loadStores()
+    /// Loads the store synchronously
+    public func loadStoreSync() {
+        self.loadStore()
     }
     
-    public func loadStoresAsync(completionHandler block: (() -> Void)? = nil) {
+    /// Loads the store asynchronously
+    public func loadStoreAsync(completionHandler block: (() -> Void)? = nil) {
         DispatchQueue.global(qos: .userInitiated).async {
-            self.loadStores(completionHandler: block)
+            self.loadStore(completionHandler: block)
         }
     }
     
+    /// Saves the block changes in the previosly initialized context type
     @discardableResult
     public func save(in contextType: ContextType, _ block: (ManagedObjectContext) -> Void) -> Error? {
         var context: ManagedObjectContext {
@@ -138,9 +144,5 @@ public class KangarooStore {
         do { try context.save(); return nil }
         catch { return error }
     }
-    
-//    public func query<Entity: ManagedObject>(in context: ManagedObjectContext) -> Query {
-//        let query = Query<Entity>(context: context)
-//        return query.execute()
-//    }
+
 }

@@ -9,9 +9,15 @@ import Foundation
 
 extension KangarooStore {
     
-    public enum ContextType {        
+    public enum ContextType {
+        
+        /// Represents the main context
         case view
+        
+        /// Represents the private queue context
         case background
+        
+        /// Represents a custom context
         case custom(ManagedObjectContext)
     }
 }

@@ -10,12 +10,14 @@
 		2C48D357A6013992C2D9F7D4 /* Pods_KangarooStore_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7813C0D2AE91AC9761207820 /* Pods_KangarooStore_Example.framework */; };
 		353A57072130FE7A002EBFB9 /* KangarooDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 353A57052130FE7A002EBFB9 /* KangarooDB.xcdatamodeld */; };
 		353A570B2130FEE2002EBFB9 /* TestDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 353A57082130FE82002EBFB9 /* TestDB.xcdatamodeld */; };
+		35831EA821362B6A004BF729 /* ComparisonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35831EA721362B6A004BF729 /* ComparisonTests.swift */; };
+		35831EAA21363208004BF729 /* SortTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35831EA921363208004BF729 /* SortTests.swift */; };
+		35831EAC21363215004BF729 /* FilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35831EAB21363215004BF729 /* FilterTests.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		763C55BC2FD14299F58084DC /* Pods_KangarooStore_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE67ABB38C4D79CB3C1CF73D /* Pods_KangarooStore_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +37,9 @@
 		2C654901A68DA0071E1FD6C5 /* Pods-KangarooStore_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KangarooStore_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KangarooStore_Tests/Pods-KangarooStore_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		353A57062130FE7A002EBFB9 /* KangarooDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KangarooDB.xcdatamodel; sourceTree = "<group>"; };
 		353A57092130FE82002EBFB9 /* KangarooDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KangarooDB.xcdatamodel; sourceTree = "<group>"; };
+		35831EA721362B6A004BF729 /* ComparisonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonTests.swift; sourceTree = "<group>"; };
+		35831EA921363208004BF729 /* SortTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortTests.swift; sourceTree = "<group>"; };
+		35831EAB21363215004BF729 /* FilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTests.swift; sourceTree = "<group>"; };
 		40431EFC5B744A82841445AF /* Pods-KangarooStore_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KangarooStore_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-KangarooStore_Example/Pods-KangarooStore_Example.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* KangarooStore_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KangarooStore_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,7 +50,6 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* KangarooStore_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KangarooStore_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7813C0D2AE91AC9761207820 /* Pods_KangarooStore_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KangarooStore_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C017D6D0F729764C970564A0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		CF77C137ED2957698417A4AD /* KangarooStore.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KangarooStore.podspec; path = ../KangarooStore.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -141,7 +145,9 @@
 			isa = PBXGroup;
 			children = (
 				353A57082130FE82002EBFB9 /* TestDB.xcdatamodeld */,
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				35831EA721362B6A004BF729 /* ComparisonTests.swift */,
+				35831EAB21363215004BF729 /* FilterTests.swift */,
+				35831EA921363208004BF729 /* SortTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -340,7 +346,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				35831EAC21363215004BF729 /* FilterTests.swift in Sources */,
+				35831EA821362B6A004BF729 /* ComparisonTests.swift in Sources */,
+				35831EAA21363208004BF729 /* SortTests.swift in Sources */,
 				353A570B2130FEE2002EBFB9 /* TestDB.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,47 +10,56 @@ import CoreData
 
 extension KangarooStore {
     
-    public class Query<Entity: ManagedObject> {
+    public struct Query<Entity: ManagedObject> {
         
         public let context: ManagedObjectContext
         public var fetchRequest: FetchRequest<Entity>
         
-        public init(context: ManagedObjectContext, fetchRequest: FetchRequest<Entity>? = nil) {
+        public init(in context: ManagedObjectContext, fetchRequest: FetchRequest<Entity> = FetchRequest<Entity>()) {
             self.context = context
-            self.fetchRequest = fetchRequest ?? FetchRequest<Entity>(context: context)
+            self.fetchRequest = fetchRequest
         }
         
-        public func execute() -> [Entity] {
-            return try! context.fetch(fetchRequest.toRaw())
-        }
-        
+        /// Executes the query and returns the number of entities
         public var count: Int {
-            return try! context.count(for: fetchRequest.toRaw())
+            return try! context.count(for: fetchRequest.toRaw(in: context))
         }
         
+        /// Executes the query and returns the first entity that matches
         public func first() -> Entity? {
-            return execute().first
+            var copy = self
+            copy.fetchRequest.limit = 1
+            return copy.execute().first
         }
         
+        /// Executes the query and returns the last entity that matches
         public func last() -> Entity? {
-            return execute().last
+            var copy = self
+            copy.fetchRequest.limit = 1
+            return copy.execute().last
         }
         
         public func filtered(using predicate: NSPredicate) -> Query {
-            fetchRequest = fetchRequest.filtered(using: predicate)
-            return self
+            var copy = self
+            copy.fetchRequest = fetchRequest.filtered(using: predicate)
+            return copy
         }
         
         public func filtered(_ block: () -> NSPredicate) -> Query {
-            fetchRequest = fetchRequest.filtered(using: block())
-            return self
+            var copy = self
+            copy.fetchRequest = fetchRequest.filtered(using: block())
+            return copy
         }
         
         public func sorted(by sortDescriptor: NSSortDescriptor) -> Query {
-            fetchRequest = fetchRequest.sorted(by: sortDescriptor)
-            return self
+            var copy = self
+            copy.fetchRequest = fetchRequest.sorted(by: sortDescriptor)
+            return copy
+        }
+        
+        public func execute() -> [Entity] {
+            return try! context.fetch(fetchRequest.toRaw(in: context))
         }
     }
-
 }
 

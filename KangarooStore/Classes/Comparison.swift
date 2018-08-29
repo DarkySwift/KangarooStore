@@ -15,7 +15,39 @@ public func < <Entity: ManagedObject, Value: Comparable>(lhs: KeyPath<Entity, Va
                                  options: rhs.comparisonOptions)
 }
 
+public func < <Entity: ManagedObject, Value: Comparable>(lhs: KeyPath<Entity, Value>, rhs: Optional<Value>) -> NSPredicate {
+    return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
+                                 rightExpression: NSExpression(forConstantValue: rhs),
+                                 modifier: .direct,
+                                 type: .lessThan,
+                                 options: rhs.comparisonOptions)
+}
+
+public func < <Entity: ManagedObject, Value: Comparable>(lhs: KeyPath<Entity, Optional<Value>>, rhs: Optional<Value>) -> NSPredicate {
+    return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
+                                 rightExpression: NSExpression(forConstantValue: rhs),
+                                 modifier: .direct,
+                                 type: .lessThan,
+                                 options: rhs.comparisonOptions)
+}
+
 public func <= <Entity: ManagedObject, Value: Comparable>(lhs: KeyPath<Entity, Value>, rhs: Value) -> NSPredicate {
+    return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
+                                 rightExpression: NSExpression(forConstantValue: rhs),
+                                 modifier: .direct,
+                                 type: .lessThanOrEqualTo,
+                                 options: rhs.comparisonOptions)
+}
+
+public func <= <Entity: ManagedObject, Value: Comparable>(lhs: KeyPath<Entity, Value>, rhs: Optional<Value>) -> NSPredicate {
+    return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
+                                 rightExpression: NSExpression(forConstantValue: rhs),
+                                 modifier: .direct,
+                                 type: .lessThanOrEqualTo,
+                                 options: rhs.comparisonOptions)
+}
+
+public func <= <Entity: ManagedObject, Value: Comparable>(lhs: KeyPath<Entity, Optional<Value>>, rhs: Optional<Value>) -> NSPredicate {
     return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
                                  rightExpression: NSExpression(forConstantValue: rhs),
                                  modifier: .direct,
@@ -31,7 +63,39 @@ public func > <Entity: ManagedObject, Value: Comparable>(lhs: KeyPath<Entity, Va
                                  options: rhs.comparisonOptions)
 }
 
+public func > <Entity: ManagedObject, Value: Comparable>(lhs: KeyPath<Entity, Value>, rhs: Optional<Value>) -> NSPredicate {
+    return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
+                                 rightExpression: NSExpression(forConstantValue: rhs),
+                                 modifier: .direct,
+                                 type: .greaterThan,
+                                 options: rhs.comparisonOptions)
+}
+
+public func > <Entity: ManagedObject, Value: Comparable>(lhs: KeyPath<Entity, Optional<Value>>, rhs: Optional<Value>) -> NSPredicate {
+    return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
+                                 rightExpression: NSExpression(forConstantValue: rhs),
+                                 modifier: .direct,
+                                 type: .greaterThan,
+                                 options: rhs.comparisonOptions)
+}
+
 public func >= <Entity: ManagedObject, Value: Comparable>(lhs: KeyPath<Entity, Value>, rhs: Value) -> NSPredicate {
+    return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
+                                 rightExpression: NSExpression(forConstantValue: rhs),
+                                 modifier: .direct,
+                                 type: .greaterThanOrEqualTo,
+                                 options: rhs.comparisonOptions)
+}
+
+public func >= <Entity: ManagedObject, Value: Comparable>(lhs: KeyPath<Entity, Value>, rhs: Optional<Value>) -> NSPredicate {
+    return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
+                                 rightExpression: NSExpression(forConstantValue: rhs),
+                                 modifier: .direct,
+                                 type: .greaterThanOrEqualTo,
+                                 options: rhs.comparisonOptions)
+}
+
+public func >= <Entity: ManagedObject, Value: Comparable>(lhs: KeyPath<Entity, Optional<Value>>, rhs: Optional<Value>) -> NSPredicate {
     return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
                                  rightExpression: NSExpression(forConstantValue: rhs),
                                  modifier: .direct,
@@ -47,12 +111,48 @@ public func == <Entity: ManagedObject, Value: Equatable>(lhs: KeyPath<Entity, Va
                                  options: rhs.comparisonOptions)
 }
 
+public func == <Entity: ManagedObject, Value: Equatable>(lhs: KeyPath<Entity, Value>, rhs: Optional<Value>) -> NSPredicate {
+    return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
+                                 rightExpression: NSExpression(forConstantValue: rhs),
+                                 modifier: .direct,
+                                 type: .equalTo,
+                                 options: rhs.comparisonOptions)
+}
+
+public func == <Entity: ManagedObject, Value: Equatable>(lhs: KeyPath<Entity, Optional<Value>>, rhs: Optional<Value>) -> NSPredicate {
+    return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
+                                 rightExpression: NSExpression(forConstantValue: rhs),
+                                 modifier: .direct,
+                                 type: .equalTo,
+                                 options: rhs.comparisonOptions)
+}
+
 public func != <Entity: ManagedObject, Value: Equatable>(lhs: KeyPath<Entity, Value>, rhs: Value) -> NSPredicate {
     return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
                                  rightExpression: NSExpression(forConstantValue: rhs),
                                  modifier: .direct,
                                  type: .notEqualTo,
                                  options: rhs.comparisonOptions)
+}
+
+public func != <Entity: ManagedObject, Value: Equatable>(lhs: KeyPath<Entity, Value>, rhs: Optional<Value>) -> NSPredicate {
+    return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
+                                 rightExpression: NSExpression(forConstantValue: rhs),
+                                 modifier: .direct,
+                                 type: .notEqualTo,
+                                 options: rhs.comparisonOptions)
+}
+
+public func != <Entity: ManagedObject, Value: Equatable>(lhs: KeyPath<Entity, Optional<Value>>, rhs: Optional<Value>) -> NSPredicate {
+    return NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: lhs),
+                                 rightExpression: NSExpression(forConstantValue: rhs),
+                                 modifier: .direct,
+                                 type: .notEqualTo,
+                                 options: rhs.comparisonOptions)
+}
+
+public func && (lhs: NSPredicate, rhs: NSPredicate) -> NSPredicate {
+    return NSCompoundPredicate(andPredicateWithSubpredicates: [lhs, rhs])
 }
 
 extension Equatable {

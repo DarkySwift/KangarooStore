@@ -8,25 +8,37 @@
 import Foundation
 import CoreData
 
-public class FetchRequest<Entity: ManagedObject> {
+/// Value type struct that represent a NSFetchRequest object
+public struct FetchRequest<Entity: ManagedObject> {
     
-    public fileprivate(set) var context: ManagedObjectContext
-    public fileprivate(set) var offset: Int = 0
-    public fileprivate(set) var limit: Int = 0
-    public fileprivate(set) var batchSize: Int = 20
-    public fileprivate(set) var predicate: NSPredicate? = nil
-    public fileprivate(set) var sortDescriptors: [NSSortDescriptor]? = nil
+    /// This setting allows you to specify an offset at which rows will begin being returned.
+    /// Effectively, the request skips the specified number of matching entries.
+    /// This property can be used to restrict the working set of data.
+    /// In combination with fetchLimit, you can create a subrange of an arbitrary result set.
+    public var offset: Int = 0
     
-    private var entity: NSEntityDescription {
+    /// The fetch limit specifies the maximum number of objects that a request should return when executed.
+    public var limit: Int = 0
+    
+    /// The default value is 0. A batch size of 0 is treated as infinite, which disables the batch faulting behavior.
+    /// If you set a nonzero batch size, the collection of objects returned when an instance of NSFetchRequest is executed is broken into batches
+    public var batchSize: Int = 20
+    
+    /// The predicate instance constrains the selection of objects the NSFetchRequest instance is to fetch.
+    public var predicate: NSPredicate? = nil
+    
+    /// The sort descriptors specify how the objects returned when the NSFetchRequest is issued should be ordered—for example, by last name and then by first name.
+    public var sortDescriptors: [NSSortDescriptor]? = nil
+    
+    private func entityDescription(in context:ManagedObjectContext) -> NSEntityDescription {
         let name = String(describing: Entity.self)
         return NSEntityDescription.entity(forEntityName: name, in: context)!
     }
     
-    public init (context: ManagedObjectContext) {
-        self.context = context
-    }
+    public init () { }
     
-    public func toRaw<Result: NSFetchRequestResult>() -> NSFetchRequest<Result> {
+    public func toRaw<Result: NSFetchRequestResult>(in context: ManagedObjectContext) -> NSFetchRequest<Result> {
+        let entity = entityDescription(in: context)
         let rawValue = NSFetchRequest<Result>(entityName: entity.name!)
         rawValue.entity = entity
         rawValue.fetchOffset = offset
@@ -38,20 +50,22 @@ public class FetchRequest<Entity: ManagedObject> {
     }
     
     public func sorted(by sortDescriptor: NSSortDescriptor) -> FetchRequest {
-        guard var sortDescriptors = self.sortDescriptors else {
-            self.sortDescriptors = [sortDescriptor]
-            return self
+        var copy = self
+        if copy.sortDescriptors != nil {
+            copy.sortDescriptors!.append(sortDescriptor)
+        } else {
+            copy.sortDescriptors = [sortDescriptor]
         }
-        sortDescriptors.append(sortDescriptor)
-        return self
+        return copy
     }
     
     public func filtered(using predicate: NSPredicate) -> FetchRequest {
-        guard let existingPredicate = self.predicate else {
-            self.predicate = predicate
-            return self
+        var copy = self
+        if copy.predicate != nil {
+            copy.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [copy.predicate!, predicate])
+        } else {
+            copy.predicate = predicate
         }
-        self.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [existingPredicate, predicate])
-        return self
+        return copy
     }
 }

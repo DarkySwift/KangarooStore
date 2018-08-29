@@ -1,5 +1,5 @@
 //
-//  Predicate.swift
+//  Expression.swift
 //  KangarooStore
 //
 //  Created by Carlos Duclos on 8/28/18.

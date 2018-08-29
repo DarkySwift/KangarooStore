@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		15B238C5E29A7F53537A1C5CBE75C145 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
 		2524D1A35E4A631C8678C7124E26550C /* FetchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DF9D12969A78DF9D45A296D0C75487 /* FetchRequest.swift */; };
+		35831EAE21364447004BF729 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35831EAD21364447004BF729 /* Predicate.swift */; };
+		35831EB0213644DD004BF729 /* Compound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35831EAF213644DD004BF729 /* Compound.swift */; };
+		35831EB2213644EC004BF729 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35831EB1213644EC004BF729 /* Expression.swift */; };
+		35831EB4213650A4004BF729 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35831EB3213650A4004BF729 /* Configuration.swift */; };
 		364A1CD30B8F0D7825B898418709795C /* Pods-KangarooStore_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 419BB9ACBDB4CEB169250B74C26D2FFF /* Pods-KangarooStore_Example-dummy.m */; };
 		3AAB6C1D467E77149B247806BB7617C7 /* StorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACD32E23276C6EA342652C43105A9B7 /* StorageType.swift */; };
 		3FBAAEC9C410526B3D2CCD5A906E1CB1 /* KangarooStore-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3357577426F0E502FD9BC30AF06BE99E /* KangarooStore-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -25,7 +29,6 @@
 		D63339212FC99103A7F680F0CB2B338A /* ContextType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813642C319D896AD08C20F0257A4C88 /* ContextType.swift */; };
 		DD4D4F67C0DB8EB17E1B1C659ACF9CF1 /* KangarooStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B870D41741211860B5F3B3DDC6BF05 /* KangarooStore.swift */; };
 		EACDEB39D674E8373629D7D19CBA7FCC /* Pods-KangarooStore_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFE27FCAC7400F28DA8B1FDE9D03CCF /* Pods-KangarooStore_Tests-dummy.m */; };
-		F70220131F2B1E62C3F5B71F1FBDC699 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473DFA403F3D1EF8F878DD52D97669D1 /* Predicate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +57,7 @@
 
 /* Begin PBXFileReference section */
 		018A95A1F9A2A587CF3568D95EDCB0E2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		05ABAEBE1FAF2B8A47EC4E122A7B7AB5 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		05ABAEBE1FAF2B8A47EC4E122A7B7AB5 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		0813642C319D896AD08C20F0257A4C88 /* ContextType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContextType.swift; path = KangarooStore/Classes/ContextType.swift; sourceTree = "<group>"; };
 		0D1A73A9F84096BC95F5CDF01BD4E5F2 /* Pods-KangarooStore_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KangarooStore_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		0D41DB6BAAA4856829CA06E6BF577A17 /* Pods-KangarooStore_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KangarooStore_Example.modulemap"; sourceTree = "<group>"; };
@@ -62,10 +65,13 @@
 		10926B638169A7EB60D8604C66EFC441 /* Pods-KangarooStore_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-KangarooStore_Tests-umbrella.h"; sourceTree = "<group>"; };
 		1ACD32E23276C6EA342652C43105A9B7 /* StorageType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StorageType.swift; path = KangarooStore/Classes/StorageType.swift; sourceTree = "<group>"; };
 		1DBE39E58DD948D22A52E409C52D50FD /* KangarooStore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KangarooStore.xcconfig; sourceTree = "<group>"; };
-		2805E66E829A040CCF24966B34261C1A /* Pods_KangarooStore_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_KangarooStore_Example.framework; path = "Pods-KangarooStore_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2805E66E829A040CCF24966B34261C1A /* Pods_KangarooStore_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KangarooStore_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3357577426F0E502FD9BC30AF06BE99E /* KangarooStore-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KangarooStore-umbrella.h"; sourceTree = "<group>"; };
+		35831EAD21364447004BF729 /* Predicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Predicate.swift; path = KangarooStore/Classes/Predicate.swift; sourceTree = "<group>"; };
+		35831EAF213644DD004BF729 /* Compound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Compound.swift; path = KangarooStore/Classes/Compound.swift; sourceTree = "<group>"; };
+		35831EB1213644EC004BF729 /* Expression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Expression.swift; path = KangarooStore/Classes/Expression.swift; sourceTree = "<group>"; };
+		35831EB3213650A4004BF729 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		419BB9ACBDB4CEB169250B74C26D2FFF /* Pods-KangarooStore_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KangarooStore_Example-dummy.m"; sourceTree = "<group>"; };
-		473DFA403F3D1EF8F878DD52D97669D1 /* Predicate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Predicate.swift; path = KangarooStore/Classes/Predicate.swift; sourceTree = "<group>"; };
 		4A8226C378747035AE495912ACBD38DE /* Pods-KangarooStore_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KangarooStore_Example-frameworks.sh"; sourceTree = "<group>"; };
 		53760BC2C1C21AA3257BE6472A72AD16 /* Pods-KangarooStore_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KangarooStore_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		57DF9D12969A78DF9D45A296D0C75487 /* FetchRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FetchRequest.swift; path = KangarooStore/Classes/FetchRequest.swift; sourceTree = "<group>"; };
@@ -75,12 +81,12 @@
 		64A4899196C6AA0DD5782FA9D33362A6 /* ResourceBundle-KangarooStore-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-KangarooStore-Info.plist"; sourceTree = "<group>"; };
 		73F39092218CF20BE24B6C35A7F7EB8F /* Pods-KangarooStore_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KangarooStore_Example-resources.sh"; sourceTree = "<group>"; };
 		7C798678EAE1D82A48D5882CBEDE18D9 /* Pods-KangarooStore_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KangarooStore_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		7E9160D45C9BA30C519DE6BEEECD74A7 /* Pods_KangarooStore_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_KangarooStore_Tests.framework; path = "Pods-KangarooStore_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E9160D45C9BA30C519DE6BEEECD74A7 /* Pods_KangarooStore_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KangarooStore_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		853365E9554E0ACADCFD005FD0253774 /* KangarooStore-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KangarooStore-prefix.pch"; sourceTree = "<group>"; };
-		8953D21E2DF7F51A1E9EC95F998B9F4B /* KangarooStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KangarooStore.framework; path = KangarooStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8953D21E2DF7F51A1E9EC95F998B9F4B /* KangarooStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KangarooStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C034EFB76587F4723287214777D6FCC /* Pods-KangarooStore_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KangarooStore_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9277858E6B1359942995CFB260833F8A /* Query.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Query.swift; path = KangarooStore/Classes/Query.swift; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93B870D41741211860B5F3B3DDC6BF05 /* KangarooStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KangarooStore.swift; path = KangarooStore/Classes/KangarooStore.swift; sourceTree = "<group>"; };
 		9B7E7B4E4FFFE48DA9ADB18F5E74F8B0 /* Pods-KangarooStore_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KangarooStore_Tests.modulemap"; sourceTree = "<group>"; };
 		A0D55A3FDA9CEED7D8B86075B58C12EC /* ManagedObject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ManagedObject.swift; path = KangarooStore/Classes/ManagedObject.swift; sourceTree = "<group>"; };
@@ -88,15 +94,15 @@
 		A1E6FFEE9488A1B9904BB9B7D402BC5B /* Pods-KangarooStore_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KangarooStore_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		AAFE27FCAC7400F28DA8B1FDE9D03CCF /* Pods-KangarooStore_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KangarooStore_Tests-dummy.m"; sourceTree = "<group>"; };
 		B328B997CED3923A5C0FA6EF52DD7B6E /* KangarooStore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KangarooStore-dummy.m"; sourceTree = "<group>"; };
-		BE97516B6347A7F82B116E4646D2904F /* KangarooStore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = KangarooStore.bundle; path = "KangarooStore-KangarooStore.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE97516B6347A7F82B116E4646D2904F /* KangarooStore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KangarooStore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		C06533402CD6F46476BB6252DB982E76 /* Pods-KangarooStore_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-KangarooStore_Example-umbrella.h"; sourceTree = "<group>"; };
 		C80D48939B014D81C936D58F8C44DE59 /* Pods-KangarooStore_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KangarooStore_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		D22E5B80855039CC1E3787CADF042B27 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		D22E5B80855039CC1E3787CADF042B27 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D739FEF91AB0DD2141C5AB2A2E7C4648 /* Comparison.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Comparison.swift; path = KangarooStore/Classes/Comparison.swift; sourceTree = "<group>"; };
 		D7636FFF676B4D7C27FAA91DB5432BC3 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF8AD9DCF549C47FF933C3596CFD5331 /* Pods-KangarooStore_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KangarooStore_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		E425399E3B9B65A9D14E00E054832BC7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F10A388CFCAC246A010C84FBB391DD4B /* KangarooStore.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = KangarooStore.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		F10A388CFCAC246A010C84FBB391DD4B /* KangarooStore.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = KangarooStore.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F7572FF4185B8356056BD1E2E921EE55 /* ManagedObjectContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ManagedObjectContext.swift; path = KangarooStore/Classes/ManagedObjectContext.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,9 +160,12 @@
 				93B870D41741211860B5F3B3DDC6BF05 /* KangarooStore.swift */,
 				A0D55A3FDA9CEED7D8B86075B58C12EC /* ManagedObject.swift */,
 				F7572FF4185B8356056BD1E2E921EE55 /* ManagedObjectContext.swift */,
-				473DFA403F3D1EF8F878DD52D97669D1 /* Predicate.swift */,
 				9277858E6B1359942995CFB260833F8A /* Query.swift */,
 				1ACD32E23276C6EA342652C43105A9B7 /* StorageType.swift */,
+				35831EAD21364447004BF729 /* Predicate.swift */,
+				35831EAF213644DD004BF729 /* Compound.swift */,
+				35831EB1213644EC004BF729 /* Expression.swift */,
+				35831EB3213650A4004BF729 /* Configuration.swift */,
 				14859FC0A17C253DCC1FE352E518B727 /* Pod */,
 				D0AD103BA465C38CAF871374E21299DF /* Support Files */,
 			);
@@ -426,14 +435,17 @@
 			files = (
 				B1D406B1765358F3BCFD442363A4CF97 /* Comparison.swift in Sources */,
 				D63339212FC99103A7F680F0CB2B338A /* ContextType.swift in Sources */,
+				35831EB0213644DD004BF729 /* Compound.swift in Sources */,
 				2524D1A35E4A631C8678C7124E26550C /* FetchRequest.swift in Sources */,
 				953EA6FE71D777A2C13F42C9376A981C /* KangarooStore-dummy.m in Sources */,
 				DD4D4F67C0DB8EB17E1B1C659ACF9CF1 /* KangarooStore.swift in Sources */,
 				799374CD4E3B2538950433C459F45D4B /* ManagedObject.swift in Sources */,
+				35831EB4213650A4004BF729 /* Configuration.swift in Sources */,
 				9F6597CBFAC0FAD5A4798FA790296216 /* ManagedObjectContext.swift in Sources */,
-				F70220131F2B1E62C3F5B71F1FBDC699 /* Predicate.swift in Sources */,
+				35831EAE21364447004BF729 /* Predicate.swift in Sources */,
 				572CC6050DD31BBFE9A0D2C05BF1D0CB /* Query.swift in Sources */,
 				3AAB6C1D467E77149B247806BB7617C7 /* StorageType.swift in Sources */,
+				35831EB2213644EC004BF729 /* Expression.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
