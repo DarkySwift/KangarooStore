@@ -1,6 +1,0 @@
-framework module Pods_KangarooStore_Example {
-  umbrella header "Pods-KangarooStore_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}

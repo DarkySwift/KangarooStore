@@ -1,0 +1,13 @@
+module: KangarooStore
+author: Carlos Duclós
+github_url: https://github.com/DarkySwift/KangarooStore
+
+theme: fullwidth
+clean: true
+
+readme: README.md
+
+skip_undocumented: false
+hide_documentation_coverage: false
+
+xcodebuild_arguments: [-workspace, Example/KangarooStore.xcworkspace, -scheme, KangarooStore-iOS, -destination, platform=iOS Simulator,name=iPhone X, -sdk, iphonesimulator]

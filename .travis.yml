@@ -8,7 +8,7 @@ matrix:
 script:
 
   # Compile with Xcodex
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild clean test -workspace Example/KangarooStore.xcworkspace -scheme KangarooStore-Example -destination "platform=iOS Simulator,name=iPhone X" -sdk iphonesimulator -enableCodeCoverage YES ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild clean test -project Xcode/KangarooStore.xcodeproj -scheme KangarooStore-iOS -destination "platform=iOS Simulator,name=iPhone X" -sdk iphonesimulator -enableCodeCoverage YES ; fi
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J 'KangarooStore'
