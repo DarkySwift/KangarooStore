@@ -827,7 +827,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = Configs/KangarooStoreTests.plist;
+				INFOPLIST_FILE = ../Configs/KangarooStoreTests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.KangarooStore.KangarooStore-iOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -841,7 +841,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = Configs/KangarooStoreTests.plist;
+				INFOPLIST_FILE = ../Configs/KangarooStoreTests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.KangarooStore.KangarooStore-iOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -994,7 +994,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Configs/KangarooStoreTests.plist;
+				INFOPLIST_FILE = ../Configs/KangarooStoreTests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.KangarooStore.KangarooStore-macOS-Tests";
@@ -1012,7 +1012,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Configs/KangarooStoreTests.plist;
+				INFOPLIST_FILE = ../Configs/KangarooStoreTests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.KangarooStore.KangarooStore-macOS-Tests";
@@ -1028,7 +1028,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = Configs/KangarooStoreTests.plist;
+				INFOPLIST_FILE = ../Configs/KangarooStoreTests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.KangarooStore.KangarooStore-tvOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1044,7 +1044,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = Configs/KangarooStoreTests.plist;
+				INFOPLIST_FILE = ../Configs/KangarooStoreTests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.KangarooStore.KangarooStore-tvOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
