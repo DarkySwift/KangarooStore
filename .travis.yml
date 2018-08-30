@@ -1,4 +1,4 @@
-language: generic
+language: swift
 matrix:
    include:
       # Test Xcode 9.2 / Swift 3.2 - 4.0
@@ -11,4 +11,4 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild clean test -project Xcode/KangarooStore.xcodeproj -scheme KangarooStore-iOS -destination "platform=iOS Simulator,name=iPhone X" -sdk iphonesimulator -enableCodeCoverage YES ; fi
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -J 'KangarooStore'
+  - bash <(curl -s https://codecov.io/bash)
