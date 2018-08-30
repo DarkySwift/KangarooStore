@@ -1,0 +1,3 @@
+[submodule "KangarooStore"]
+	path = KangarooStore
+	url = https://github.com/DarkySwift/KangarooStore

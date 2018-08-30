@@ -10,4 +10,4 @@ readme: README.md
 skip_undocumented: false
 hide_documentation_coverage: false
 
-xcodebuild_arguments: [-workspace, Example/KangarooStore.xcworkspace, -scheme, KangarooStore-iOS, -destination, platform=iOS Simulator,name=iPhone X, -sdk, iphonesimulator]
+xcodebuild_arguments: [-project, Xcode/KangarooStore.xcodeproj, -scheme, KangarooStore-iOS, -destination, platform=iOS Simulator,name=iPhone X, -sdk, iphonesimulator]
