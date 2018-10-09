@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35319748216D1CBA00A26BF6 /* KangarooStore.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 35319747216D1CBA00A26BF6 /* KangarooStore.podspec */; };
 		3579A7182137DB56008664DF /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579A70C2137DB46008664DF /* Query.swift */; };
 		3579A7192137DB56008664DF /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579A70D2137DB46008664DF /* Expression.swift */; };
 		3579A71A2137DB56008664DF /* FetchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579A70E2137DB46008664DF /* FetchRequest.swift */; };
@@ -101,6 +102,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		35319747216D1CBA00A26BF6 /* KangarooStore.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KangarooStore.podspec; path = ../KangarooStore.podspec; sourceTree = "<group>"; };
 		3579A7052137DB46008664DF /* LinuxMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 		3579A7092137DB46008664DF /* KangarooStoreTests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = KangarooStoreTests.plist; sourceTree = "<group>"; };
 		3579A70A2137DB46008664DF /* KangarooStore.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = KangarooStore.plist; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 		52D6D9721BEFF229002C0205 = {
 			isa = PBXGroup;
 			children = (
+				35319747216D1CBA00A26BF6 /* KangarooStore.podspec */,
 				3579A7082137DB46008664DF /* Configs */,
 				3579A70B2137DB46008664DF /* Sources */,
 				3579A7042137DB46008664DF /* Tests */,
@@ -496,6 +499,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35319748216D1CBA00A26BF6 /* KangarooStore.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
