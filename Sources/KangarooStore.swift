@@ -18,19 +18,31 @@ public class KangarooStore {
         ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10,
                                                                       minorVersion: 0,
                                                                       patchVersion: 0)) == false
-
+    
     public private(set) var storageType: StorageType
     public private(set) var databaseName: String
     public private(set) var directoryURL: URL!
     public private(set) var managedObjectModel: NSManagedObjectModel
     public private(set) var persistentStoreCoordinator: NSPersistentStoreCoordinator
-    public private(set) var viewContext: ManagedObjectContext
+    //    public private(set) var viewContext: ManagedObjectContext
     
-    public private(set) lazy var backgroundContext: ManagedObjectContext = {
+    public private(set) lazy var masterContext: ManagedObjectContext = {
         let context = ManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         context.persistentStoreCoordinator = persistentStoreCoordinator
         return context
     }()
+    
+    public lazy var viewContext: ManagedObjectContext = {
+        let context = ManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        context.parent = masterContext
+        return context
+    }()
+    
+    public var newTemporaryContext: ManagedObjectContext {
+        let context = ManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        context.parent = viewContext
+        return context
+    }
     
     public var storeURL: URL {
         let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -52,63 +64,29 @@ public class KangarooStore {
         
         persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
         
-        viewContext = ManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        viewContext.persistentStoreCoordinator = persistentStoreCoordinator
+        //        viewContext = ManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        //        viewContext.persistentStoreCoordinator = persistentStoreCoordinator
         
         self.storageType = storageType
         self.databaseName = databaseName
         self.managedObjectModel = managedObjectModel
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(managedObjectContextDidSave(notification:)),
-                                               name: .NSManagedObjectContextDidSave,
-                                               object: nil)
+        //        NotificationCenter.default.addObserver(self,
+        //                                               selector: #selector(managedObjectContextDidSave(notification:)),
+        //                                               name: .NSManagedObjectContextDidSave,
+        //                                               object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
-    // MARK: - Private Methods
-    
-    /// Handler method that merges changes to other contexts
-    @objc private func managedObjectContextDidSave(notification: Notification) {
-        guard let changedContext = notification.object as? ManagedObjectContext else { return }
-        
-        let viewContext = self.viewContext
-        let backgroundContext = self.backgroundContext
-        
-        if (changedContext === backgroundContext) {
-            viewContext.mergeChanges(fromContextDidSave: notification)
-            
-        } else if (changedContext === viewContext) {
-            backgroundContext.mergeChanges(fromContextDidSave: notification)
-            
-        } else {
-            viewContext.mergeChanges(fromContextDidSave: notification)
-            backgroundContext.mergeChanges(fromContextDidSave: notification)
-        }
-        
-        if shouldPatchCoreData {
-            let privateQueueObjects = notification.userInfo?[NSUpdatedObjectsKey] as? Set<ManagedObject> ?? []
-            
-            // Force the refresh of updated objects which may not have been registered in this context.
-            let mainContextObjects = privateQueueObjects.map {
-                (try? viewContext.existingObject(with: $0.objectID)) ?? viewContext.object(with: $0.objectID)
-            }
-            
-            mainContextObjects.forEach {
-                viewContext.refresh($0, mergeChanges: true)
-                $0.willAccessValue(forKey: nil)
-            }
-        }
-    }
+    // MARK: - Methods
     
     internal func getContext(from contextType: ContextType) -> ManagedObjectContext {
         switch contextType {
         case .view: return viewContext
-        case .background: return backgroundContext
-        case .custom(let context): return context
+        case .temporary(let context): return context
         }
     }
     
@@ -119,6 +97,7 @@ public class KangarooStore {
                            NSInferMappingModelAutomaticallyOption : true ]
             let type = (storageType == .disk ? NSSQLiteStoreType : NSInMemoryStoreType)
             try persistentStoreCoordinator.addPersistentStore(ofType: type, configurationName: nil, at: storeURL, options: options)
+            block?()
         } catch {
             fatalError("Error adding store: \(error)")
         }
@@ -133,27 +112,82 @@ public class KangarooStore {
     
     /// Loads the store asynchronously
     public func loadStoreAsync(completionHandler block: (() -> Void)? = nil) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.loadStore(completionHandler: block)
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.loadStore(completionHandler: block)
         }
     }
-}
-
-extension KangarooStore {
     
-    /// Saves the block changes in the previously initialized context type
-    @discardableResult
-    public func save(in contextType: ContextType, _ block: (ManagedObjectContext) -> Void) -> Error? {
-        let context = getContext(from: contextType)
-        block(context)
-        do { try context.save(); return nil }
-        catch { return error }
+    public func save(in type: ContextType,
+                     mode: ManagedObjectContext.Mode = .async,
+                     block: @escaping (ManagedObjectContext) throws -> Void,
+                     completion: ((Result<()>) -> Void)? = nil) {
+        
+        switch type {
+        case .view:
+            saveViewContext(mode: mode, block: block, completion: completion)
+            
+        case .temporary(let context):
+            saveTemporary(context: context, mode: mode, block: block, completion: completion)
+        }
     }
-}
-
-extension KangarooStore {
- 
     
+    public func saveTemporary(context: ManagedObjectContext,
+                              mode: ManagedObjectContext.Mode,
+                              block: @escaping (ManagedObjectContext) throws -> Void,
+                              completion: ((Result<()>) -> Void)? = nil) {
+        context.perform(mode) { [weak self] in
+            guard let `self` = self else { return }
+            
+            do {
+                try block(context)
+                try context.save()
+                self.saveViewContext(mode: mode, completion: completion)
+            } catch {
+                completion?(.error(error))
+                assertionFailure("CORE DATA TEMPORARY CONTEXT ERROR: \(error)")
+            }
+        }
+    }
+    
+    public func saveViewContext(mode: ManagedObjectContext.Mode,
+                                block: ((ManagedObjectContext) throws -> Void)? = nil,
+                                completion: ((Result<()>) -> Void)? = nil) {
+        
+        viewContext.perform(mode) { [weak self] in
+            guard let `self` = self else { return }
+            
+            do {
+                try block?(self.viewContext)
+                try self.viewContext.save()
+                self.saveMasterContext(mode: mode, completion: completion)
+            } catch {
+                completion?(.error(error))
+                assertionFailure("CORE DATA VIEW CONTEXT ERROR: \(error)")
+            }
+        }
+    }
+    
+    internal func saveMasterContext(mode: ManagedObjectContext.Mode,
+                                    completion: ((Result<()>) -> Void)? = nil) {
+        
+        masterContext.perform(mode) { [weak self] in
+            guard let `self` = self else { return }
+            
+            do {
+                try self.masterContext.save()
+                completion?(.success)
+            } catch {
+                completion?(.error(error))
+                assertionFailure("CORE DATA MASTER CONTEXT ERROR: \(error)")
+            }
+        }
+    }
+    
+    func clearAll<Entity: ManagedObject>(for entity: Entity.Type, in context: ManagedObjectContext? = nil) {
+        let usedContext = context ?? viewContext
+        let entities = Query<Entity>(in: usedContext).all(includeProperties: false)
+        entities.forEach { usedContext.delete($0) }
+    }
 }
 
 extension KangarooStore {

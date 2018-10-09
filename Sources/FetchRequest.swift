@@ -30,6 +30,8 @@ public struct FetchRequest<Entity: ManagedObject> {
     /// The sort descriptors specify how the objects returned when the NSFetchRequest is issued should be ordered—for example, by last name and then by first name.
     public var sortDescriptors: [NSSortDescriptor]? = nil
     
+    public var includePropertyValues: Bool = true
+    
     private func entityDescription(in context: ManagedObjectContext) -> NSEntityDescription {
         let name = String(describing: Entity.self)
         return NSEntityDescription.entity(forEntityName: name, in: context)!
@@ -46,6 +48,7 @@ public struct FetchRequest<Entity: ManagedObject> {
         rawValue.fetchBatchSize = (self.limit > 0 && self.batchSize > self.limit ? 0 : self.batchSize)
         rawValue.predicate = predicate
         rawValue.sortDescriptors = sortDescriptors
+        rawValue.includesPropertyValues = includePropertyValues
         return rawValue
     }
     
@@ -66,6 +69,12 @@ public struct FetchRequest<Entity: ManagedObject> {
         } else {
             copy.predicate = predicate
         }
+        return copy
+    }
+    
+    internal func all() -> FetchRequest {
+        var copy = self
+        copy.predicate = nil
         return copy
     }
 }

@@ -70,6 +70,7 @@
 		3579A75A2137DCAE008664DF /* FilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579A74D2137DCAE008664DF /* FilterTests.swift */; };
 		3579A75B2137DCAE008664DF /* FilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579A74D2137DCAE008664DF /* FilterTests.swift */; };
 		3579A75C2137DCAE008664DF /* FilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579A74D2137DCAE008664DF /* FilterTests.swift */; };
+		35D04ED8216B3BCF00D9FFF8 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D04ED7216B3BCF00D9FFF8 /* Result.swift */; };
 		52D6D9871BEFF229002C0205 /* KangarooStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* KangarooStore.framework */; };
 		DD7502881C68FEDE006590AF /* KangarooStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6DA0F1BF000BD002C0205 /* KangarooStore.framework */; };
 		DD7502921C690C7A006590AF /* KangarooStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D9F01BEFFFBE002C0205 /* KangarooStore.framework */; };
@@ -120,6 +121,7 @@
 		3579A74B2137DCAE008664DF /* KangarooDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KangarooDB.xcdatamodel; sourceTree = "<group>"; };
 		3579A74C2137DCAE008664DF /* ComparisonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComparisonTests.swift; sourceTree = "<group>"; };
 		3579A74D2137DCAE008664DF /* FilterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTests.swift; sourceTree = "<group>"; };
+		35D04ED7216B3BCF00D9FFF8 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		52D6D97C1BEFF229002C0205 /* KangarooStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KangarooStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D6D9861BEFF229002C0205 /* KangarooStore-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "KangarooStore-iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D6D9E21BEFFF6E002C0205 /* KangarooStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KangarooStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,6 +234,7 @@
 				3579A7152137DB46008664DF /* KangarooStore.swift */,
 				3579A7162137DB46008664DF /* Configuration.swift */,
 				3579A7172137DB46008664DF /* ManagedObject.swift */,
+				35D04ED7216B3BCF00D9FFF8 /* Result.swift */,
 			);
 			name = Sources;
 			path = ../Sources;
@@ -546,6 +549,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3579A7202137DB56008664DF /* StorageType.swift in Sources */,
+				35D04ED8216B3BCF00D9FFF8 /* Result.swift in Sources */,
 				3579A7212137DB56008664DF /* KangarooStore.swift in Sources */,
 				3579A7232137DB56008664DF /* ManagedObject.swift in Sources */,
 				3579A71A2137DB56008664DF /* FetchRequest.swift in Sources */,

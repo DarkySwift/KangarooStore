@@ -12,56 +12,59 @@ public typealias ManagedObjectContext = NSManagedObjectContext
 
 extension ManagedObjectContext {
     
-    public func async<Value>(block: @escaping () throws -> Value, completion: ((Result<Value>) -> Void)? = nil) {
-        perform {
-            do {
-                let value = try block()
-                completion?(.success(value))
-            } catch {
-                completion?(.error(error))
-            }
-        }
-    }
-//    
-//    public func async<Value>(block: @escaping () -> Value, completion: ((Value) -> Void)? = nil) {
+//    public func async(block: @escaping () -> Void) {
 //        perform {
-//            let value = block()
-//            completion?(value)
+//            block()
 //        }
 //    }
     
+    public enum Mode {
+        case sync
+        case async
+    }
+    
+    public func perform(_ mode: Mode, block: @escaping () -> Void) {
+        switch mode {
+        case .sync:
+            self.performAndWait {
+                block()
+            }
+        case .async:
+            self.perform {
+                block()
+            }
+        }
+    }
+    
+    public func async<Value>(block: @escaping () -> Value, completion: ((Value) -> Void)? = nil) {
+        perform {
+            completion?(block())
+        }
+    }
+
     @discardableResult
     public func sync<Value>(_ block: () throws -> Value) throws -> Value {
         var value: Value? = nil
         var outError: Error?
-        
+
         performAndWait {
             do { try value = block() }
             catch { outError = error }
         }
-        
+
         if let outError = outError {
             throw outError
         }
-        
+
         return value!
     }
-    
-    @discardableResult
-    public func sync<Value>(_ block: () -> Value) -> Value {
-        var value: Value? = nil
-        performAndWait {
-            value = block()
-        }
-        return value!
-    }
-}
-
-extension ManagedObjectContext {
-
-    public enum Result<T> {
-        
-        case success(T)
-        case error(Error)
-    }
+//
+//    @discardableResult
+//    public func sync<Value>(_ block: () -> Value) -> Value {
+//        var value: Value? = nil
+//        performAndWait {
+//            value = block()
+//        }
+//        return value!
+//    }
 }

@@ -20,7 +20,7 @@ class ComparisonTests: XCTestCase {
         let bundle = Bundle(for: ComparisonTests.self)
         kangaroo = KangarooStore(name: "TestDB", storageType: .memory, bundle: bundle)
         kangaroo.loadStoreSync()
-        kangaroo.save(in: .view) { context in
+        kangaroo.save(in: .view, mode: .sync, block: { context in
             let entity2 = TestEntity(in: context)
             entity2.id = 2
             entity2.name = "entity2"
@@ -40,19 +40,19 @@ class ComparisonTests: XCTestCase {
             entity6.id = 6
             entity6.name = "entity6"
             entity6.lastname = "test"
-        }
+        })
     }
     
     func testLessThanComparison() {
         do {
-            let query = Query<TestEntity>(in: kangaroo.backgroundContext).where { \TestEntity.id < 4 }
+            let query = Query<TestEntity>(in: kangaroo.newTemporaryContext).where { \TestEntity.id < 4 }
             let entities = query.execute()
             XCTAssertEqual(entities.count, 2)
         }
         
         do {
             let optional: Int32? = 4
-            let query = Query<TestEntity>(in: kangaroo.backgroundContext).where { \TestEntity.id < optional }
+            let query = Query<TestEntity>(in: kangaroo.newTemporaryContext).where { \TestEntity.id < optional }
             let entities = query.execute()
             XCTAssertEqual(entities.count, 2)
         }
@@ -60,14 +60,14 @@ class ComparisonTests: XCTestCase {
     
     func testLessOrEqualsThanComparison() {
         do {
-            let query = Query<TestEntity>(in: kangaroo.backgroundContext).where { \TestEntity.id <= 5 }
+            let query = Query<TestEntity>(in: kangaroo.newTemporaryContext).where { \TestEntity.id <= 5 }
             let entities = query.execute()
             XCTAssertEqual(entities.count, 3)
         }
         
         do {
             let optional: Int32? = 5
-            let query = Query<TestEntity>(in: kangaroo.backgroundContext).where { \TestEntity.id <= optional }
+            let query = Query<TestEntity>(in: kangaroo.newTemporaryContext).where { \TestEntity.id <= optional }
             let entities = query.execute()
             XCTAssertEqual(entities.count, 3)
         }
@@ -75,14 +75,14 @@ class ComparisonTests: XCTestCase {
     
     func testGreaterThanComparison() {
         do {
-            let query = Query<TestEntity>(in: kangaroo.backgroundContext).where { \TestEntity.id > 4 }
+            let query = Query<TestEntity>(in: kangaroo.newTemporaryContext).where { \TestEntity.id > 4 }
             let entities = query.execute()
             XCTAssertEqual(entities.count, 2)
         }
         
         do {
             let optional: Int32? = 4
-            let query = Query<TestEntity>(in: kangaroo.backgroundContext).where { \TestEntity.id > optional }
+            let query = Query<TestEntity>(in: kangaroo.newTemporaryContext).where { \TestEntity.id > optional }
             let entities = query.execute()
             XCTAssertEqual(entities.count, 2)
         }
@@ -90,14 +90,14 @@ class ComparisonTests: XCTestCase {
     
     func testGreaterOrEqualsThanComparison() {
         do {
-            let query = Query<TestEntity>(in: kangaroo.backgroundContext).where { \TestEntity.id >= 5 }
+            let query = Query<TestEntity>(in: kangaroo.newTemporaryContext).where { \TestEntity.id >= 5 }
             let entities = query.execute()
             XCTAssertEqual(entities.count, 2)
         }
         
         do {
             let optional: Int32? = 5
-            let query = Query<TestEntity>(in: kangaroo.backgroundContext).where { \TestEntity.id >= optional }
+            let query = Query<TestEntity>(in: kangaroo.newTemporaryContext).where { \TestEntity.id >= optional }
             let entities = query.execute()
             XCTAssertEqual(entities.count, 2)
         }
@@ -105,14 +105,14 @@ class ComparisonTests: XCTestCase {
     
     func testEqualsThanComparison() {
         do {
-            let query = Query<TestEntity>(in: kangaroo.backgroundContext).where { \TestEntity.id == 5 }
+            let query = Query<TestEntity>(in: kangaroo.newTemporaryContext).where { \TestEntity.id == 5 }
             let entities = query.execute()
             XCTAssertEqual(entities.count, 1)
         }
         
         do {
             let optional: Int32? = 5
-            let query = Query<TestEntity>(in: kangaroo.backgroundContext).where { \TestEntity.id == optional }
+            let query = Query<TestEntity>(in: kangaroo.newTemporaryContext).where { \TestEntity.id == optional }
             let entities = query.execute()
             XCTAssertEqual(entities.count, 1)
         }
@@ -120,14 +120,14 @@ class ComparisonTests: XCTestCase {
     
     func testNotEqualsThanComparison() {
         do {
-            let query = Query<TestEntity>(in: kangaroo.backgroundContext).where { \TestEntity.id != 5 }
+            let query = Query<TestEntity>(in: kangaroo.newTemporaryContext).where { \TestEntity.id != 5 }
             let entities = query.execute()
             XCTAssertEqual(entities.count, 3)
         }
         
         do {
             let optional: Int32? = 5
-            let query = Query<TestEntity>(in: kangaroo.backgroundContext).where { \TestEntity.id != optional }
+            let query = Query<TestEntity>(in: kangaroo.newTemporaryContext).where { \TestEntity.id != optional }
             let entities = query.execute()
             XCTAssertEqual(entities.count, 3)
         }

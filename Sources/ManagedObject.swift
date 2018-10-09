@@ -61,3 +61,10 @@ extension ManagedObject {
         return self.value(forKey: key)
     }
 }
+
+extension Sequence where Element: ManagedObject {
+    
+    public func delete(in context: ManagedObjectContext) {
+        forEach { context.delete($0) }
+    }
+}

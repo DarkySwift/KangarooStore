@@ -12,8 +12,6 @@ extension KangarooStore {
     
     public struct Query<Entity: ManagedObject> {
         
-        public typealias Result = ManagedObjectContext.Result
-        
         public let context: ManagedObjectContext
         public var fetchRequest: FetchRequest<Entity>
         
@@ -57,6 +55,13 @@ extension KangarooStore {
             return copy
         }
         
+        public func all(includeProperties: Bool = true) -> [Entity] {
+            var copy = self
+            copy.fetchRequest.includePropertyValues = includeProperties
+            copy.fetchRequest = fetchRequest.all()
+            return copy.execute()
+        }
+        
         public func order(by sortDescriptor: NSSortDescriptor) -> Query {
             var copy = self
             copy.fetchRequest = fetchRequest.sorted(by: sortDescriptor)
@@ -78,19 +83,34 @@ extension KangarooStore {
             let context = self.context
             let fetchRequest = self.fetchRequest
             
-            return context.async(block: {
-                return try context.fetch(fetchRequest.toRaw(in: context)) as [Entity]
-            }, completion: completion)
+            context.perform {
+                do {
+                    let entities: [Entity] = try context.fetch(fetchRequest.toRaw(in: context)) as [Entity]
+                    completion?(.success(entities))
+                } catch {
+                    completion?(.error(error))
+                }
+            }
         }
     }
 }
 
 extension KangarooStore.Query {
     
-    internal func create() -> Entity {
-        let name = String(describing: type(of: self))
+    public func create() -> Entity {
+        let name = String(describing: Entity.self)
         guard let entity = NSEntityDescription.entity(forEntityName: name, in: context) else { fatalError("Wrong entity name") }
         return ManagedObject(entity: entity, insertInto: context) as! Entity
+    }
+    
+    public func findOrCreateFirst() -> Entity {
+        guard let existingEntity = first() else { return create() }
+        return existingEntity
+    }
+    
+    public func findByAttribute<Value: Comparable>(keypath: ReferenceWritableKeyPath<Entity, Value?>,
+                                                   value: Value?) -> Entity? {
+        return self.where({ keypath == value }).first()
     }
     
     public func findOrCreate(where block: () -> NSPredicate) -> Entity {
@@ -104,6 +124,18 @@ extension KangarooStore.Query {
 }
 
 extension KangarooStore.Query {
+    
+    public func delete(where block: () -> NSPredicate) throws {
+        let request = fetchRequest.toRaw(in: context) as NSFetchRequest<NSManagedObjectID>
+        request.resultType = .managedObjectIDResultType
+        request.predicate = block()
+        
+        let ids = try context.fetch(request)
+        for id in ids {
+            let object = try context.existingObject(with: id)
+            self.context.delete(object)
+        }
+    }
     
     public func delete(_ entity: Entity) {
         context.delete(entity)

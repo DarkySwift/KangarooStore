@@ -22,7 +22,7 @@ class FilterTests: XCTestCase {
         let bundle = Bundle(for: FilterTests.self)
         kangaroo = KangarooStore(name: "TestDB", storageType: .memory, bundle: bundle)
         kangaroo.loadStoreSync()
-        kangaroo.save(in: .view) { context in
+        kangaroo.save(in: .view, mode: .sync, block: { context in
             let entity2 = TestEntity(in: context)
             entity2.id = 2
             entity2.name = "entity2"
@@ -42,7 +42,7 @@ class FilterTests: XCTestCase {
             entity6.id = 6
             entity6.name = "entity6"
             entity6.lastname = "test"
-        }
+        })
     }
     
     func testFilterInViewContext() {
@@ -60,7 +60,7 @@ class FilterTests: XCTestCase {
     func testFilterInBackgroundContext() {
         do {
             let predicate = NSPredicate(format: "lastname = %@", "test")
-            let query = Query<TestEntity>(in: kangaroo.backgroundContext).filtered(using: predicate)
+            let query = Query<TestEntity>(in: kangaroo.newTemporaryContext).filtered(using: predicate)
             let entities = query.execute()
             XCTAssertEqual(entities.count, 4)
         }
@@ -68,7 +68,7 @@ class FilterTests: XCTestCase {
     
     func testNotEqualsThanComparison() {
         do {
-            let query = Query<TestEntity>(in: kangaroo.backgroundContext).where {
+            let query = Query<TestEntity>(in: kangaroo.newTemporaryContext).where {
                 \TestEntity.id != 5 && \TestEntity.lastname == "test"
             }
             let entities = query.execute()
