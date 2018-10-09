@@ -20,7 +20,7 @@ class ActionTests: XCTestCase {
         let bundle = Bundle(for: SortTests.self)
         kangaroo = KangarooStore(name: "TestDB", storageType: .memory, bundle: bundle)
         kangaroo.loadStoreSync()
-        kangaroo.save(in: .view, mode: .sync, block: { context in
+        kangaroo.saveSync(in: .view, block: { context in
             let entity1 = TestEntity(in: context)
             entity1.id = 1
             entity1.name = "entity1"
@@ -35,7 +35,7 @@ class ActionTests: XCTestCase {
     
     func testMergeChangesBetweenContexts() {
         do {
-            kangaroo.save(in: .view, mode: .sync, block: { context in
+            kangaroo.saveSync(in: .view, block: { context in
                 let entity3 = TestEntity(in: context)
                 entity3.id = 3
                 entity3.name = "entity3"
@@ -48,7 +48,7 @@ class ActionTests: XCTestCase {
         
         do {
             let context = kangaroo.newTemporaryContext
-            kangaroo.save(in: .temporary(context), mode: .sync, block: { context in
+            kangaroo.saveSync(in: .temporary(context), block: { context in
                 let entity4 = TestEntity(in: context)
                 entity4.id = 4
                 entity4.name = "entity4"

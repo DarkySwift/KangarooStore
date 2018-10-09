@@ -117,17 +117,28 @@ public class KangarooStore {
         }
     }
     
-    public func save(in type: ContextType,
-                     mode: ManagedObjectContext.Mode = .async,
-                     block: @escaping (ManagedObjectContext) throws -> Void,
-                     completion: ((Result<()>) -> Void)? = nil) {
+    public func saveAsync(in type: ContextType,
+                          block: @escaping (ManagedObjectContext) throws -> Void,
+                          completion: ((Result<()>) -> Void)? = nil) {
         
         switch type {
         case .view:
-            saveViewContext(mode: mode, block: block, completion: completion)
+            saveViewContext(mode: .async, block: block, completion: completion)
             
         case .temporary(let context):
-            saveTemporary(context: context, mode: mode, block: block, completion: completion)
+            saveTemporary(context: context, mode: .async, block: block, completion: completion)
+        }
+    }
+    
+    public func saveSync(in type: ContextType,
+                         block: @escaping (ManagedObjectContext) throws -> Void) {
+        
+        switch type {
+        case .view:
+            saveViewContext(mode: .sync, block: block)
+            
+        case .temporary(let context):
+            saveTemporary(context: context, mode: .sync, block: block)
         }
     }
     

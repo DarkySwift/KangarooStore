@@ -20,7 +20,7 @@ class SortTests: XCTestCase {
         let bundle = Bundle(for: SortTests.self)
         kangaroo = KangarooStore(name: "TestDB", storageType: .memory, bundle: bundle)
         kangaroo.loadStoreSync()
-        kangaroo.save(in: .view, mode: .sync, block: { context in
+        kangaroo.saveSync(in: .view, block: { context in
             let entity2 = TestEntity(in: context)
             entity2.id = 2
             entity2.name = "entity2"
