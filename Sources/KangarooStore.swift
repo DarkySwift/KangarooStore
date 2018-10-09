@@ -194,7 +194,7 @@ public class KangarooStore {
         }
     }
     
-    func clearAll<Entity: ManagedObject>(for entity: Entity.Type, in context: ManagedObjectContext? = nil) {
+    public func clearAll<Entity: ManagedObject>(for entity: Entity.Type, in context: ManagedObjectContext? = nil) {
         let usedContext = context ?? viewContext
         let entities = Query<Entity>(in: usedContext).all(includeProperties: false)
         entities.forEach { usedContext.delete($0) }
