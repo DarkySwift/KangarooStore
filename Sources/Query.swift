@@ -108,8 +108,8 @@ extension KangarooStore.Query {
         return existingEntity
     }
     
-    public func findByAttribute<Value: Comparable>(keypath: ReferenceWritableKeyPath<Entity, Value?>,
-                                                   value: Value?) -> Entity? {
+    public func findByAttribute<Value: Equatable>(keypath: ReferenceWritableKeyPath<Entity, Value>,
+                                                   value: Value) -> Entity? {
         return self.where({ keypath == value }).first()
     }
     
