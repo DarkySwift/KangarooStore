@@ -103,6 +103,8 @@ extension KangarooStore.Query {
         return ManagedObject(entity: entity, insertInto: context) as! Entity
     }
     
+    
+    
     public func findOrCreateFirst() -> Entity {
         guard let existingEntity = first() else { return create() }
         return existingEntity
