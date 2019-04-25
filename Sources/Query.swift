@@ -64,7 +64,13 @@ extension KangarooStore {
         
         public func order(by sortDescriptor: NSSortDescriptor) -> Query {
             var copy = self
-            copy.fetchRequest = fetchRequest.sorted(by: sortDescriptor)
+            copy.fetchRequest = fetchRequest.sorted(by: [sortDescriptor])
+            return copy
+        }
+        
+        public func order(by sortDescriptors: NSSortDescriptor...) -> Query {
+            var copy = self
+            copy.fetchRequest = fetchRequest.sorted(by: sortDescriptors)
             return copy
         }
         

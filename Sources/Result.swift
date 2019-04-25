@@ -10,14 +10,14 @@ import Foundation
 
 public extension KangarooStore {
     
-    public enum Result<T> {
-        
+    enum Result<T> {
         case success(T)
         case error(Error)
     }
 }
 
 extension KangarooStore.Result where T == Void {
+    
     static var success: KangarooStore.Result<()> {
         return .success(())
     }

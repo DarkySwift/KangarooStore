@@ -52,12 +52,12 @@ public struct FetchRequest<Entity: ManagedObject> {
         return rawValue
     }
     
-    internal func sorted(by sortDescriptor: NSSortDescriptor) -> FetchRequest {
+    internal func sorted(by sortDescriptors: [NSSortDescriptor]) -> FetchRequest {
         var copy = self
         if copy.sortDescriptors != nil {
-            copy.sortDescriptors!.append(sortDescriptor)
+            copy.sortDescriptors!.append(contentsOf: sortDescriptors)
         } else {
-            copy.sortDescriptors = [sortDescriptor]
+            copy.sortDescriptors = sortDescriptors
         }
         return copy
     }
