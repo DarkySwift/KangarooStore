@@ -8,10 +8,10 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KangarooStore'
-  s.version          = '1.3.6'
+  s.version          = '1.4'
   s.summary          = 'A very lightweight Core Data framework.'
   # s.resources        = 'KangarooStore/Assets/*'
-  s.swift_version    = '4.2'
+  s.swift_version    = '5.0'
   s.description      = <<-DESC
 A very lightweight Core Data framework. You\'ll be able to fetch object in an easier way.
                        DESC

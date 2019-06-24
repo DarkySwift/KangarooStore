@@ -14,17 +14,11 @@ public class KangarooStore {
     
     public static var defaultComparisonOptions: NSComparisonPredicate.Options = [.caseInsensitive, .diacriticInsensitive]
     
-    private lazy var shouldPatchCoreData: Bool =
-        ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10,
-                                                                      minorVersion: 0,
-                                                                      patchVersion: 0)) == false
-    
     public private(set) var storageType: StorageType
     public private(set) var databaseName: String
     public private(set) var directoryURL: URL!
     public private(set) var managedObjectModel: NSManagedObjectModel
     public private(set) var persistentStoreCoordinator: NSPersistentStoreCoordinator
-    //    public private(set) var viewContext: ManagedObjectContext
     
     public private(set) lazy var masterContext: ManagedObjectContext = {
         let context = ManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -44,15 +38,16 @@ public class KangarooStore {
         return context
     }
     
-    public var storeURL: URL {
-        let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        return docURL.appendingPathComponent("\(self.databaseName).sqlite")
-    }
+    public var storeURL: URL
     
     // MARK: - Initialize
     
-    public init(name databaseName: String, storageType: StorageType = .disk, bundle: Bundle? = nil, directoryURL url: URL? = nil) {
+    public init(name databaseName: String,
+                storageType: StorageType = .disk,
+                bundle: Bundle? = nil,
+                storeURL url: URL? = nil) {
         let theBundle = bundle ?? Bundle.main
+        let storeURL = url ?? FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         
         guard let modelURL = theBundle.url(forResource: databaseName, withExtension:"momd") else {
             fatalError("Error loading model from bundle")
@@ -63,18 +58,10 @@ public class KangarooStore {
         }
         
         persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-        
-        //        viewContext = ManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        //        viewContext.persistentStoreCoordinator = persistentStoreCoordinator
-        
         self.storageType = storageType
+        self.storeURL = storeURL.appendingPathComponent("\(databaseName).sqlite")
         self.databaseName = databaseName
         self.managedObjectModel = managedObjectModel
-        
-        //        NotificationCenter.default.addObserver(self,
-        //                                               selector: #selector(managedObjectContextDidSave(notification:)),
-        //                                               name: .NSManagedObjectContextDidSave,
-        //                                               object: nil)
     }
     
     deinit {
