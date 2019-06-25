@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		35319748216D1CBA00A26BF6 /* KangarooStore.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 35319747216D1CBA00A26BF6 /* KangarooStore.podspec */; };
+		354FE71822C17D0C00EF7384 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D04ED7216B3BCF00D9FFF8 /* Result.swift */; };
 		3579A7182137DB56008664DF /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579A70C2137DB46008664DF /* Query.swift */; };
 		3579A7192137DB56008664DF /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579A70D2137DB46008664DF /* Expression.swift */; };
 		3579A71A2137DB56008664DF /* FetchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579A70E2137DB46008664DF /* FetchRequest.swift */; };
@@ -585,6 +586,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				354FE71822C17D0C00EF7384 /* Result.swift in Sources */,
 				3579A7382137DB57008664DF /* StorageType.swift in Sources */,
 				3579A7392137DB57008664DF /* KangarooStore.swift in Sources */,
 				3579A73B2137DB57008664DF /* ManagedObject.swift in Sources */,
