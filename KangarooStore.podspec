@@ -22,7 +22,7 @@ A very lightweight Core Data framework. You\'ll be able to fetch object in an ea
   s.source           = { :git => 'https://github.com/DarkySwift/KangarooStore.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
-
+  s.watchos.deployment_target = '2.0'
   s.source_files = 'Sources/**/*'
   
   # s.resource_bundles = {
