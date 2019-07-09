@@ -133,15 +133,19 @@ extension KangarooStore.Query {
 
 extension KangarooStore.Query {
     
-    public func delete(where block: () -> NSPredicate) throws {
+    public func delete(where block: () -> NSPredicate) {
         let request = fetchRequest.toRaw(in: context) as NSFetchRequest<NSManagedObjectID>
         request.resultType = .managedObjectIDResultType
         request.predicate = block()
         
-        let ids = try context.fetch(request)
-        for id in ids {
-            let object = try context.existingObject(with: id)
-            self.context.delete(object)
+        do {
+            let ids = try context.fetch(request)
+            try ids.forEach {
+                let object = try context.existingObject(with: $0)
+                self.context.delete(object)
+            }
+        } catch let error {
+            print(error)
         }
     }
     
