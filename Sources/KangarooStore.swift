@@ -92,6 +92,10 @@ public class KangarooStore {
     
     // MARK: - Public Methods
     
+    public func hasPersistentStore(type: String) -> Bool {
+        return persistentStoreCoordinator.persistentStores.filter { $0.type == type }.count > 0
+    }
+    
     /// Loads the store synchronously
     public func loadStoreSync() {
         loadStore()
