@@ -23,17 +23,20 @@ public class KangarooStore {
     public private(set) lazy var masterContext: ManagedObjectContext = {
         let context = ManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         context.persistentStoreCoordinator = persistentStoreCoordinator
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return context
     }()
     
     public lazy var viewContext: ManagedObjectContext = {
         let context = ManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         context.parent = masterContext
         return context
     }()
     
     public var newTemporaryContext: ManagedObjectContext {
         let context = ManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         context.parent = viewContext
         return context
     }
