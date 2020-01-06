@@ -20,17 +20,17 @@ public class KangarooStore {
     public private(set) var managedObjectModel: NSManagedObjectModel
     public private(set) var persistentStoreCoordinator: NSPersistentStoreCoordinator
     
-    public private(set) lazy var masterContext: ManagedObjectContext = {
+    public private(set) lazy var masterContext: ManagedObjectContext = { [weak self] in
         let context = ManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        context.persistentStoreCoordinator = persistentStoreCoordinator
+        context.persistentStoreCoordinator = self?.persistentStoreCoordinator
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return context
     }()
     
-    public lazy var viewContext: ManagedObjectContext = {
+    public lazy var viewContext: ManagedObjectContext = { [weak self] in
         let context = ManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        context.parent = masterContext
+        context.parent = self?.masterContext
         return context
     }()
     
@@ -141,7 +141,7 @@ public class KangarooStore {
                               block: @escaping (ManagedObjectContext) throws -> Void,
                               completion: ((Result<()>) -> Void)? = nil) {
         context.perform(mode) { [weak self] in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             
             do {
                 try block(context)
@@ -159,7 +159,7 @@ public class KangarooStore {
                                 completion: ((Result<()>) -> Void)? = nil) {
         
         viewContext.perform(mode) { [weak self] in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             
             do {
                 try block?(self.viewContext)
@@ -176,7 +176,7 @@ public class KangarooStore {
                                     completion: ((Result<()>) -> Void)? = nil) {
         
         masterContext.perform(mode) { [weak self] in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             
             do {
                 try self.masterContext.save()

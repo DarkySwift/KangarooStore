@@ -80,6 +80,9 @@ extension KangarooStore {
         }
         
         public func executeSync() throws -> [Entity] {
+            let context = self.context
+            let fetchRequest = self.fetchRequest
+            
             return try context.sync {
                 try context.fetch(fetchRequest.toRaw(in: context))
             }
