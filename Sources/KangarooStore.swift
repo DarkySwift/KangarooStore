@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-public class KangarooStore {
+open class KangarooStore {
     
     // MARK: - Properties
     
