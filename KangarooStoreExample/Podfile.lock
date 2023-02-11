@@ -1,5 +1,5 @@
 PODS:
-  - KangarooStore (1.1)
+  - KangarooStore (1.4.8)
 
 DEPENDENCIES:
   - KangarooStore (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  KangarooStore: 53cd3843303789122bf0680eacb0719ae9ff49ec
+  KangarooStore: 525c90da63f3e869fb1fe01c36028997aa4691c3
 
 PODFILE CHECKSUM: 501b288990adfca413073e4f35f7927ecbe33774
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.11.3

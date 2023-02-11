@@ -111,6 +111,19 @@ open class KangarooStore {
         }
     }
     
+    public func save(in type: ContextType, block: @escaping (ManagedObjectContext) throws -> Void) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            saveAsync(in: type, block: block) { result in
+                switch result {
+                case .success:
+                    continuation.resume(with: .success(()))
+                case .error(let error):
+                    continuation.resume(with: .failure(error))
+                }
+            }
+        }
+    }
+    
     public func saveAsync(in type: ContextType,
                           block: @escaping (ManagedObjectContext) throws -> Void,
                           completion: ((Result<()>) -> Void)? = nil) {

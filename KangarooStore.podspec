@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KangarooStore'
-  s.version          = '1.4.7'
+  s.version          = '1.4.8'
   s.summary          = 'A very lightweight Core Data framework.'
   # s.resources        = 'KangarooStore/Assets/*'
   s.swift_version    = '5.0'
@@ -21,7 +21,7 @@ A very lightweight Core Data framework. You\'ll be able to fetch object in an ea
   s.author           = { 'Carlos Duclos' => 'darkzeratul64@gmail.com' }
   s.source           = { :git => 'https://github.com/DarkySwift/KangarooStore.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '13.0'
   s.watchos.deployment_target = '2.0'
   s.source_files = 'Sources/**/*'
   
