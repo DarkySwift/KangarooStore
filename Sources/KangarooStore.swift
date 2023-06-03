@@ -18,24 +18,24 @@ open class KangarooStore {
     public private(set) var databaseName: String
     public private(set) var directoryURL: URL!
     public private(set) var managedObjectModel: NSManagedObjectModel
-    public private(set) var persistentStoreCoordinator: NSPersistentStoreCoordinator
+    public let persistentContainer: NSPersistentContainer
     
-    public private(set) lazy var masterContext: ManagedObjectContext = { [weak self] in
+    public private(set) lazy var masterContext: ManagedObjectContext = {
         let context = ManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        context.persistentStoreCoordinator = self?.persistentStoreCoordinator
+        context.persistentStoreCoordinator = persistentContainer.persistentStoreCoordinator
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return context
     }()
     
-    public lazy var viewContext: ManagedObjectContext = { [weak self] in
+    public lazy var viewContext: ManagedObjectContext = {
         let context = ManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        context.parent = self?.masterContext
+        context.parent = masterContext
         return context
     }()
     
     public var newTemporaryContext: ManagedObjectContext {
-        let context = ManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        let context = persistentContainer.newBackgroundContext()
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         context.parent = viewContext
         return context
@@ -60,7 +60,7 @@ open class KangarooStore {
             fatalError("Error initializing mom from: \(modelURL)")
         }
         
-        persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
+        persistentContainer = NSPersistentContainer(name: databaseName)
         self.storageType = storageType
         self.storeURL = storeURL.appendingPathComponent("\(databaseName).sqlite")
         self.databaseName = databaseName
@@ -81,33 +81,32 @@ open class KangarooStore {
     }
     
     /// Loads the store
-    fileprivate func loadStore(configuration: Configuration = .default, completionHandler block: (() -> Void)? = nil) {
-        do {
-            let options = [NSMigratePersistentStoresAutomaticallyOption : true,
-                           NSInferMappingModelAutomaticallyOption : true ]
-            let type = (storageType == .disk ? NSSQLiteStoreType : NSInMemoryStoreType)
-            try persistentStoreCoordinator.addPersistentStore(ofType: type, configurationName: nil, at: storeURL, options: options)
-            block?()
-        } catch {
-            fatalError("Error adding store: \(error)")
-        }
-    }
+//    fileprivate func loadStore(configuration: Configuration = .default, completionHandler block: (() -> Void)? = nil) {
+//        do {
+//            let options = [NSMigratePersistentStoresAutomaticallyOption : true,
+//                           NSInferMappingModelAutomaticallyOption : true ]
+//            let type = (storageType == .disk ? NSSQLiteStoreType : NSInMemoryStoreType)
+//            try persistentStoreCoordinator.addPersistentStore(ofType: type, configurationName: nil, at: storeURL, options: options)
+//            block?()
+//        } catch {
+//            fatalError("Error adding store: \(error)")
+//        }
+//    }
     
     // MARK: - Public Methods
     
     public func hasPersistentStore(type: String) -> Bool {
-        return persistentStoreCoordinator.persistentStores.filter { $0.type == type }.count > 0
-    }
-    
-    /// Loads the store synchronously
-    public func loadStoreSync() {
-        loadStore()
+        return persistentContainer.persistentStoreCoordinator.persistentStores.filter { $0.type == type }.count > 0
     }
     
     /// Loads the store asynchronously
-    public func loadStoreAsync(completionHandler block: (() -> Void)? = nil) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.loadStore(completionHandler: block)
+    public func loadStoreAsync(completionHandler: @escaping (Error?) -> Void) {
+        persistentContainer.loadPersistentStores { description, error in
+            if let error = error {
+                completionHandler(error)
+                return
+            }
+            completionHandler(nil)
         }
     }
     
@@ -213,3 +212,4 @@ extension KangarooStore {
                                                            substitutionVariables: substitutionVariables) as! NSFetchRequest<Entity>
     }
 }
+
