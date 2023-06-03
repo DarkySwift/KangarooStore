@@ -101,6 +101,16 @@ extension KangarooStore {
                 }
             }
         }
+        
+        @available(iOS 15.0, *)
+        public func execute() async -> [Entity] {
+            let context = self.context
+            let fetchRequest = self.fetchRequest
+            let result = try? await context.perform {
+                try context.fetch(fetchRequest.toRaw(in: context)) as [Entity]
+            }
+            return result ?? []
+        }
     }
 }
 
@@ -111,8 +121,6 @@ extension KangarooStore.Query {
         guard let entity = NSEntityDescription.entity(forEntityName: name, in: context) else { fatalError("Wrong entity name") }
         return ManagedObject(entity: entity, insertInto: context) as! Entity
     }
-    
-    
     
     public func findOrCreateFirst() -> Entity {
         guard let existingEntity = first() else { return create() }

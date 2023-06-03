@@ -111,16 +111,10 @@ open class KangarooStore {
         }
     }
     
-    public func save(in type: ContextType, block: @escaping (ManagedObjectContext) throws -> Void) async throws {
-        try await withCheckedThrowingContinuation { continuation in
-            saveAsync(in: type, block: block) { result in
-                switch result {
-                case .success:
-                    continuation.resume(with: .success(()))
-                case .error(let error):
-                    continuation.resume(with: .failure(error))
-                }
-            }
+    @available(iOS 15.0, *)
+    public func save(context: ManagedObjectContext, block: @escaping () throws -> Void) async throws {
+        try await context.perform {
+            try block()
         }
     }
     
@@ -139,7 +133,6 @@ open class KangarooStore {
     
     public func saveSync(in type: ContextType,
                          block: @escaping (ManagedObjectContext) throws -> Void) {
-        
         switch type {
         case .view:
             saveViewContext(mode: .sync, block: block)
