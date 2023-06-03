@@ -8,6 +8,10 @@
 import Foundation
 import CoreData
 
+class PersistentContainer: NSPersistentContainer {
+    
+}
+
 open class KangarooStore {
     
     // MARK: - Properties
@@ -60,7 +64,7 @@ open class KangarooStore {
             fatalError("Error initializing mom from: \(modelURL)")
         }
         
-        persistentContainer = NSPersistentContainer(name: databaseName)
+        persistentContainer = NSPersistentContainer(name: databaseName, managedObjectModel: managedObjectModel)
         self.storageType = storageType
         self.storeURL = storeURL.appendingPathComponent("\(databaseName).sqlite")
         self.databaseName = databaseName
