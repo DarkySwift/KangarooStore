@@ -80,18 +80,16 @@ open class KangarooStore {
         }
     }
     
-    /// Loads the store
-//    fileprivate func loadStore(configuration: Configuration = .default, completionHandler block: (() -> Void)? = nil) {
-//        do {
-//            let options = [NSMigratePersistentStoresAutomaticallyOption : true,
-//                           NSInferMappingModelAutomaticallyOption : true ]
-//            let type = (storageType == .disk ? NSSQLiteStoreType : NSInMemoryStoreType)
-//            try persistentStoreCoordinator.addPersistentStore(ofType: type, configurationName: nil, at: storeURL, options: options)
-//            block?()
-//        } catch {
-//            fatalError("Error adding store: \(error)")
-//        }
-//    }
+    private func defaultStoreDescription(shouldLoadAsync: Bool) -> NSPersistentStoreDescription {
+        let type = (storageType == .disk ? NSSQLiteStoreType : NSInMemoryStoreType)
+        let storeDescription = NSPersistentStoreDescription()
+        storeDescription.shouldInferMappingModelAutomatically = true
+        storeDescription.shouldMigrateStoreAutomatically = true
+        storeDescription.shouldAddStoreAsynchronously = shouldLoadAsync
+        storeDescription.type = type
+        storeDescription.url = storeURL
+        return storeDescription
+    }
     
     // MARK: - Public Methods
     
@@ -99,8 +97,8 @@ open class KangarooStore {
         return persistentContainer.persistentStoreCoordinator.persistentStores.filter { $0.type == type }.count > 0
     }
     
-    /// Loads the store asynchronously
-    public func loadStoreAsync(completionHandler: @escaping (Error?) -> Void) {
+    public func loadStore(shouldLoadAsync: Bool = false, completionHandler: @escaping (Error?) -> Void) {
+        persistentContainer.persistentStoreDescriptions.append(defaultStoreDescription(shouldLoadAsync: shouldLoadAsync))
         persistentContainer.loadPersistentStores { description, error in
             if let error = error {
                 completionHandler(error)
