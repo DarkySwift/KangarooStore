@@ -103,7 +103,7 @@ extension KangarooStore {
         }
         
         @available(iOS 15.0, *)
-        public func execute() async -> [Entity] {
+        public func executeAwait() async -> [Entity] {
             let context = self.context
             let fetchRequest = self.fetchRequest
             let result = try? await context.perform {
@@ -138,6 +138,15 @@ extension KangarooStore.Query {
 
     public func findOrCreate(where predicate: NSPredicate) -> Entity {
         guard let existingEntity = filtered(using: predicate).first() else { return create() }
+        return existingEntity
+    }
+    
+    @available(iOS 15.0, *)
+    public func findOrCreate(where block: () -> NSPredicate) async -> Entity {
+        let entities = await filtered(using: block()).executeAwait()
+        guard let existingEntity = entities.first else {
+            return create()
+        }
         return existingEntity
     }
 }
