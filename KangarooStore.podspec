@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KangarooStore'
-  s.version          = '1.5.0'
+  s.version          = '1.5.1'
   s.summary          = 'A very lightweight Core Data framework.'
   # s.resources        = 'KangarooStore/Assets/*'
   s.swift_version    = '5.0'
