@@ -82,12 +82,11 @@ open class KangarooStore {
     
     private func defaultStoreDescription(shouldLoadAsync: Bool) -> NSPersistentStoreDescription {
         let type = (storageType == .disk ? NSSQLiteStoreType : NSInMemoryStoreType)
-        let storeDescription = NSPersistentStoreDescription()
+        let storeDescription = NSPersistentStoreDescription(url: storeURL)
         storeDescription.shouldInferMappingModelAutomatically = true
         storeDescription.shouldMigrateStoreAutomatically = true
         storeDescription.shouldAddStoreAsynchronously = shouldLoadAsync
         storeDescription.type = type
-        storeDescription.url = storeURL
         return storeDescription
     }
     
