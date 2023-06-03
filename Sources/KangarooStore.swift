@@ -98,7 +98,7 @@ open class KangarooStore {
     }
     
     public func loadStore(shouldLoadAsync: Bool = false, completionHandler: @escaping (Error?) -> Void) {
-        persistentContainer.persistentStoreDescriptions.append(defaultStoreDescription(shouldLoadAsync: shouldLoadAsync))
+        persistentContainer.persistentStoreDescriptions = [defaultStoreDescription(shouldLoadAsync: shouldLoadAsync)]
         persistentContainer.loadPersistentStores { description, error in
             if let error = error {
                 completionHandler(error)
