@@ -79,12 +79,26 @@ extension KangarooStore {
             return entities ?? []
         }
         
+        public func execute<Element>(block: ([Entity]) -> [Element]) -> [Element] {
+            (try? executeSync(block: block)) ?? []
+        }
+        
         public func executeSync() throws -> [Entity] {
             let context = self.context
             let fetchRequest = self.fetchRequest
             
             return try context.sync {
                 try context.fetch(fetchRequest.toRaw(in: context))
+            }
+        }
+        
+        public func executeSync<Element>(block: ([Entity]) -> [Element]) throws -> [Element]  {
+            let context = self.context
+            let fetchRequest = self.fetchRequest
+            
+            return try context.sync {
+                let entities: [Entity] = try context.fetch(fetchRequest.toRaw(in: context))
+                return block(entities)
             }
         }
 
